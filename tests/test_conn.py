@@ -9,3 +9,4 @@ def test_conn_admin_enter(browser_admin):
     password = browser_admin.find_element_by_name('password')
     password.send_keys(AdminPanel.Enter_Admin.PASSWORD)
     browser_admin.find_element_by_class_name('btn-primary').click()
+

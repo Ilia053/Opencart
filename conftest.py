@@ -3,7 +3,8 @@ import selenium
 from selenium import webdriver
 from locators import AdminPanel
 import pickle
-
+from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
+import time
 
 def pytest_addoption(parser):
     parser.addoption('--url',action='store', default='http://localhost/')
@@ -38,4 +39,30 @@ def browser_admin_inside(browser_admin):
     browser_admin.find_element_by_class_name('btn-primary').click()
     return browser_admin
 
+@pytest.fixture
+def browser_with_log(request):
+    options = webdriver.ChromeOptions()
+    options.add_argument('start-maximized')
+    wd = EventFiringWebDriver(webdriver.Chrome(executable_path=r'C:\Webdrivers\chromedriver.exe'), Mylistener())
+    # request.addfinalizer(wd.close())
+    return wd
+
+
+class Mylistener(AbstractEventListener):
+
+    def before_find(self, by, value, driver):
+        print('!!!!!!!!!!!!!!!!!!!')
+
+    def after_find(self, by, value, driver):
+        print("11111111111111111111111")
+
+    def on_exception(self, exception, driver):
+        print('eeeeeeeeeeeeeee')
+
+
+def test_1(browser_with_log):
+    browser_with_log.get('http://localhost/admin/')
+    time.sleep(2)
+    browser_with_log.save_screenshot('3333.png')
+    browser_with_log.find_element_by_class_name('input-group-addon')
 

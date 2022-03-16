@@ -7,6 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 from locators import AdminPanel
 import pytest
 import pickle
+import os
 
 # def test():
 #     dr = webdriver.Chrome(f'C:\WebDrivers\chromedriver.exe')
@@ -62,4 +63,14 @@ import pickle
 #     sleep(1)
 #
 # dr.close()
-print(breakpoint())
+# dr = webdriver.Chrome(f'C:\WebDrivers\chromedriver.exe')
+# dr.get('http://localhost/admin/')
+# dr.execute_script('window.open()')
+# print(dr.window_handles)
+# dr.switch_to.window(dr.window_handles[1])
+# dr.get('http://ya.ru')
+# dr.switch_to.window(dr.window_handles[0])
+
+# dirname = os.path.dirname(__file__)
+# name = os.path.join(dirname, '0.txt')
+print(__file__)
