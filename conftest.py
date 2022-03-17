@@ -5,6 +5,8 @@ from locators import AdminPanel
 import pickle
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 import time
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import telegram_send
 
 def pytest_addoption(parser):
     parser.addoption('--url',action='store', default='http://localhost/')
@@ -41,9 +43,12 @@ def browser_admin_inside(browser_admin):
 
 @pytest.fixture
 def browser_with_log(request):
+    d = DesiredCapabilities.CHROME
+    d['loggingPrefs'] = {'performance': 'ALL'}
     options = webdriver.ChromeOptions()
     options.add_argument('start-maximized')
-    wd = EventFiringWebDriver(webdriver.Chrome(executable_path=r'C:\Webdrivers\chromedriver.exe'), Mylistener())
+    options.add_experimental_option('w3c',False)
+    wd = EventFiringWebDriver(webdriver.Chrome(executable_path=r'C:\Webdrivers\chromedriver.exe',options=options,desired_capabilities=d), Mylistener())
     # request.addfinalizer(wd.close())
     return wd
 
@@ -63,6 +68,9 @@ class Mylistener(AbstractEventListener):
 def test_1(browser_with_log):
     browser_with_log.get('http://localhost/admin/')
     time.sleep(2)
-    browser_with_log.save_screenshot('3333.png')
+    # browser_with_log.save_screenshot('3333.png')
     browser_with_log.find_element_by_class_name('input-group-addon')
+    telegram_send.send(messages=['Done!'])
+    print(browser_with_log.log_types)
+
 
