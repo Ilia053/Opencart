@@ -8,6 +8,7 @@ from locators import AdminPanel
 import pytest
 import pickle
 import os
+from dataclasses import dataclass, asdict
 
 # def test():
 #     dr = webdriver.Chrome(f'C:\WebDrivers\chromedriver.exe')
@@ -73,4 +74,20 @@ import os
 
 # dirname = os.path.dirname(__file__)
 # name = os.path.join(dirname, '0.txt')
-print(__file__)
+# print(__file__)
+@dataclass()
+class Data:
+    num: int
+    name: str
+    age: int
+
+class Data_Hand:
+    def __init__(self,x,y,z):
+        self.data = Data(x,y,z)
+
+    def show_all(self):
+        print(asdict(self.data))
+
+
+a = Data_Hand(1,'ilia',35)
+a.show_all()
