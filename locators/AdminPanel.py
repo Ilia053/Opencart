@@ -6,4 +6,3 @@ class Enter_Admin:
     LOGIN = {'id': 'user'}
     PASSWORD = 'bitnami'
 
-print(Enter_Admin.LOGIN['id'])

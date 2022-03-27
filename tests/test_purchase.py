@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 import pytest
 import pytest_dependency
 import pytest_order
+import pytest_html
+import allure
 
 
 @pytest.mark.order(1)

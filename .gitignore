@@ -1,2 +1,4 @@
 .idea
 .pytest_cache
+allure_report
+assets
