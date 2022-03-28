@@ -88,7 +88,7 @@ def enviroment_info():
 
 
 
-
+@pytest.mark.skip
 def test_1(browser_with_log):
     browser_with_log.get('http://localhost/admin/')
     time.sleep(2)
@@ -97,6 +97,7 @@ def test_1(browser_with_log):
     # telegram_send.send(messages=['Done!'])
     print(browser_with_log.log_types)
 
+@pytest.mark.skip
 def test_2(remote_drive):
     remote_drive.get('https://mne.tools/stable/auto_tutorials/intro/20_events_from_raw.html')
     time.sleep(16)
